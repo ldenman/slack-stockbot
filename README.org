@@ -1,0 +1,29 @@
+* slack-stockbot
+A dumb bot that listens and fetches a quote when someone mentions a symbol (ex $AAPL or
+$GOOG).
+
+* Deployment
+
+** Heroku
+
+*** Setup
+I had to run the following to disable web service. One time.
+#+BEGIN_SRC sh
+heroku ps:scale web=0
+heroku ps:scale worker=1
+#+END_SRC
+
+The Procfile informs heroku to use a worker but I had to run the commands above
+in addition when I was setting up.
+
+#+BEGIN_SRC sh
+git remote add heroku ...
+git push heroku master
+#+END_SRC
+
+* Development
+
+  #+BEGIN_SRC sh
+  npm install
+  node stockbot.js
+  #+END_SRC
