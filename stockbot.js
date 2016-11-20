@@ -75,7 +75,7 @@ controller.spawn({
 
 var yahooFinance = require('yahoo-finance');
 
-controller.hears(['\\$(.*)'],['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears(['\\$(.*)'], ['ambient'], function(bot,message) {
     const  { user, channel, text } = message;
     const userData = text.match(/\$([A-Z]+)/)
     if ( userData ) {
