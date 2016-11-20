@@ -1,1 +1,1 @@
-web: node stockbot.js
+worker: node stockbot.js
