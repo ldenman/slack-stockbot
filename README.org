@@ -21,9 +21,16 @@ git remote add heroku ...
 git push heroku master
 #+END_SRC
 
+Also, set the /token/ environment variable in heroku to the token which slack issued for
+the bot.
+
+#+BEGIN_SRC sh
+heroku config:set token=TOKENFROMSLACK
+#+END_SRC
+
 * Development
 
   #+BEGIN_SRC sh
   npm install
-  node stockbot.js
+  token=TOKENFROMSLACK node stockbot.js
   #+END_SRC
