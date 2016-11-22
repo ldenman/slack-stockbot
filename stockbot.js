@@ -19,16 +19,22 @@ controller.spawn({
 });
 
 controller.hears(['\\$(.*)'], ['ambient'], function(bot,message) {
+    console.log(message);
     const  { user, channel, text } = message;
-    const userData = text.match(/\$([A-Z]+)/)
-    if ( userData ) {
+    const userData = text.match(/\$([A-Z]+)/g)
+    console.log(userData);
+    if ( userData.length > 0 ) {
+
+        userData.forEach(function(e) {
 
 
-        yfinance.getQuotes(userData[1], function (err, data) {
+
+        yfinance.getQuotes(e.match(/\$([A-Z]+)/)[1], function (err, data) {
             if(err) console.log(err);
-            bot.reply(message, data);
+
+            if (data[0]) {
             data = data[0];
-            if (data) {
+                if (data.Name) {
                 bot.reply(message, ""
                           + data.Name
                           + " ("+data.symbol
@@ -43,9 +49,14 @@ controller.hears(['\\$(.*)'], ['ambient'], function(bot,message) {
                           + "↑ "
                           + data.DaysHigh
                          );
+                } else {
+                    bot.reply(message, "Err: can't find symbol: " + data.symbol)
+                }
             }
 
         });
+
+        })
 
     }
 });

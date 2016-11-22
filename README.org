@@ -1,5 +1,5 @@
 * slack-stockbot
-A dumb bot that listens and fetches a quote when someone mentions a symbol (ex $AAPL or
+A simple bot that listens and fetches a quote when someone mentions a symbol (ex $AAPL or
 $GOOG).
 
 * Deployment
