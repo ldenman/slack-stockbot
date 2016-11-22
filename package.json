@@ -4,15 +4,15 @@
   "description": "",
   "main": "stockbot.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node stockbot.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node stockbot.js"
   },
-    "engines": {
-        "node": "6.1.0"
-    },
+  "engines": {
+    "node": "6.1.0"
+  },
   "dependencies": {
     "botkit": "^0.4.1",
-    "yahoo-finance": "^0.2.14"
+    "yfinance": "0.0.6"
   },
   "author": "",
   "license": "ISC"

@@ -1,5 +1,5 @@
 var Botkit = require('botkit');
-
+var yfinance = require('yfinance');
 
 if (!process.env.token) {
   console.log('Error: Specify token in environment');
@@ -18,21 +18,34 @@ controller.spawn({
   }
 });
 
-var yahooFinance = require('yahoo-finance');
-
 controller.hears(['\\$(.*)'], ['ambient'], function(bot,message) {
     const  { user, channel, text } = message;
     const userData = text.match(/\$([A-Z]+)/)
     if ( userData ) {
-        yahooFinance.snapshot({
-            symbol: userData[1],
-            fields: ['s', 'n', 'l1'],
-        }, function (err, snapshot) {
-            if (snapshot) {
-                if (snapshot.name && snapshot.lastTradePriceOnly) {
-                    bot.reply(message, "" + snapshot.name + " ("+snapshot.symbol+")"+" - $" + snapshot.lastTradePriceOnly );
-                }
+
+
+        yfinance.getQuotes(userData[1], function (err, data) {
+            if(err) console.log(err);
+            bot.reply(message, data);
+            data = data[0];
+            if (data) {
+                bot.reply(message, ""
+                          + data.Name
+                          + " ("+data.symbol
+                          + ")"+" - "
+                          + data.LastTradePriceOnly
+                          + " | "
+                          + data.ChangeinPercent
+                          + " | "
+                          + "↓ "
+                          + data.DaysLow
+                          + " | "
+                          + "↑ "
+                          + data.DaysHigh
+                         );
             }
+
         });
+
     }
 });
